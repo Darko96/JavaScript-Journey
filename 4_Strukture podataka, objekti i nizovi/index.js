@@ -486,9 +486,73 @@ Mozete praviti iteracije nad nizovima promenljivih koristeci posebnu vrstu petlj
 // Vezbe
 
 // Suma opsega
+let range = function (start, end) {
+  let array = [];
+
+  for (let number = start; number <= end; number++) {
+    array.push(number);
+  }
+  return array;
+};
+console.log(range(1, 10));
+
+let sum = function (array) {
+  let sum = 0;
+  for (let number of array) {
+    sum += number;
+  }
+
+  return sum;
+};
+console.log(sum([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+
+let rangev2 = function (start, end, step) {
+  let array = [];
+
+  if (step >= 0) {
+    for (let number = start; number <= end; number += step) {
+      array.push(number);
+    }
+  } else {
+    for (let number = start; number >= end; number -= Math.abs(step)) {
+      array.push(number);
+    }
+  }
+  return array;
+};
+console.log(rangev2(1, 10, 2));
+console.log(rangev2(5, 2, -1));
 
 // Obrtanje niza
+let reverseArray = function (array) {
+  let newReverseArray = array.reverse();
+  return newReverseArray;
+};
+console.log(reverseArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
+
+let reverseArrayInPlace = function (array) {
+  let newReverseArrayInPlace = [];
+  while (array.length !== 0) {
+    newReverseArrayInPlace.push(array.pop());
+  }
+  return newReverseArrayInPlace;
+};
+console.log(reverseArrayInPlace([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
 
 // Lista
+// Ključna stvar je da petlja ne zamrzava okolinu u kojoj radi, dok prolazi kroz svaki korak,
+// ona ima pristup i može menjati vrednosti promenljivih definisanih van nje.
 
-// Detaljno predjenje
+function arrayToList(array) {
+  let list = null;
+
+  for (let i = array.length - 1; i >= 0; i--) {
+    list = { value: array[i], rest: list };
+    // Ova linija ažurira list u svakoj iteraciji, pre nego što sledeći prolaz petlje počne.
+    // Dakle, list ne čeka kraj petlje da se promeni, menja se odmah, a petlja koristi novu vrednost pri sledećem koraku.
+  }
+  return list;
+}
+console.log(arrayToList([10, 20, 30]));
+
+function listToArray() {}
